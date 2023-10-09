@@ -1,0 +1,25 @@
+/* Making the Input field dark and the placeholder text light */
+.form-control-cd {
+    background-color: #343a40; /* Dark background same as navbar */
+    border-color: #6c757d; /* Same border color as the button */
+    color: #ffffff; /* White color text */
+}
+
+.form-control-cd::placeholder {
+    color: #adb5bd; /* Light placeholder text */
+}
+
+/* Same border for button and input */
+.btn-outline-secondary-cd {
+    border-color: #6c757d; /* Same border color as the input */
+}
+
+/* Additional spacing between elements */
+.nav-item + .nav-item {
+    margin-left: 10px;
+}
+
+/* If you want to adjust the space between form and buttons */
+.d-flex + .nav-item {
+    margin-left: 10px;
+}
