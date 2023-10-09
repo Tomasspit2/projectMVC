@@ -13,7 +13,7 @@ class AnnonceController extends AbstractController
     public function index(): string
     {
         $annonceManager = new AnnonceManager();
-        $annonces = $annonceManager->selectAll('title');
+        $annonces = $annonceManager->selectAll('titre_annonce');
 
         return $this->twig->render(
             'Annonce/index.html.twig',
@@ -32,7 +32,7 @@ class AnnonceController extends AbstractController
         $annonce = $annonceManager->selectOneById($id);
 
         return $this->twig->render(
-            'Annonce/show.html.twig',
+            'annonce/show.html.twig',
             ['annonce' => $annonce]
         );
     }
