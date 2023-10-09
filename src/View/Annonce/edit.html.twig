@@ -1,0 +1,7 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Edit annonce {{ annonce.titre_annonce }}</h1>
+    {% include 'Annonce/_form.html.twig' %}
+    <a href="/Annonce/show?id={{ annonce.uid_annonce }}">Back</a>
+{% endblock %}
