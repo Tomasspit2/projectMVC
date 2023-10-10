@@ -3,34 +3,38 @@
 {% block content %}
     <section class="main cd-main-homepage">
         <div class="container cd-homepage-container">
-            <div class="row mb-4 cd-h1-section">
+            <div class="row mb-4 mt-4 cd-h1-section">
                 <h1 class="cd-h1">Liste des annonces :: <span class="cd-h1-span">Faites vos jeux, rien ne va plus !</span></h1>
             </div>
             <div class="row align-items-center mb-4 cd-filter-marque">
                 <p class="col-auto cd-filter-title mb-0 mr-2">Filter par marque:</p>
-                <button class="col-auto btn btn-outline-secondary cd-button-marque">Toutes</button>
+                <button class="col-auto btn btn-outline-warning cd-button-marque">Toutes</button>
                 {% for annonce in annonces %}
-                <button class="col-auto btn btn-outline-secondary cd-button-marque">{{ annonce.marque }}</button>
+                <button class="col-auto btn btn-outline-warning cd-button-marque">{{ annonce.marque }}</button>
                 {% endfor %}
             </div>
             <div class="row align-items-center mb-2 cd-ordre-alphabet">
                 <p class="col-auto cd-ordre-title mb-0 mr-2">Ordre alphabétique:</p>
-                <button class="col-auto btn btn-outline-secondary cd-button-ordre">Croissant</button>
-                <button class="col-auto btn btn-outline-secondary cd-button-ordre">Décroissant</button>
+                <button class="col-auto btn btn-outline-warning cd-button-ordre">Croissant</button>
+                <button class="col-auto btn btn-outline-warning cd-button-ordre">Décroissant</button>
             </div>
-            <div class="row cd-card-container">
+            <div class="row cd-container-card">
                 {% for annonce in annonces %}
-                    <div class="col-md-3 mb-3 cd-card">
-                        <img src="/assets/images/{{ annonce.photo }}" class="cd-image-card img-fluid">
+                    <div class="col-md-2 m-2 cd-card">
+                        <div class="cd-image-container">
+                            <img src="/assets/images/{{ annonce.photo }}" class="cd-image-card img-fluid">
+                        </div>
                         <p class="cd-model">{{ annonce.modele }}</p>
                         <div class="cd-titre-annonce">{{ annonce.titre_annonce }}</div>
-                        <button><a href="/annonce/show?id={{ annonce.id }}">Détail</a></button>
+                        <button class="btn btn-outline-warning m-2"><a class="cd-detail" href="/annonce/show?id={{ annonce.id }}">Détail</a></button>
                     </div>
                 {% else %}
                     <li>Nothing to display</li>
                 {% endfor %}
             </div>
-            <a href="/annonce/add">Ajouter</a>
+            <div class="d-flex flex-row">
+            <button class="btn btn-outline-warning mt-2 mb-2"><a class="cd-detail" href="/annonce/add">Ajouter une annonce</a></button>
+            </div>
         </div>
     </section>
 {% endblock %}
