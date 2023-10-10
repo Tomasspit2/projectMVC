@@ -2,12 +2,10 @@
 
 namespace App\Model;
 
-use App\Model\AbstractManager;
 use PDO;
 
 class UserManager extends AbstractManager
 {
-
     public const TABLE = 'utilisateurs';
 
     public function selectOneByEmail(string $email): array|false
@@ -22,7 +20,7 @@ class UserManager extends AbstractManager
 
     public function selectOneById(int $id): array
     {
-        $query = "SELECT * FROM " . static::TABLE . " WHERE uid_utilisateur = :id";
+        $query = "SELECT * FROM " . static::TABLE . " WHERE id = :id";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':id', $id, PDO::PARAM_INT);
         $statement->execute();
@@ -30,18 +28,21 @@ class UserManager extends AbstractManager
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function insert(array $user): int
+    public function addUser(array $user): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (nom, prenom, email, password)
-        VALUES (:lastname, :firstname, :email, :password)");
-        $statement->bindValue(':lastname', $user['nom'], PDO::PARAM_STR);
-        $statement->bindValue(':firstname', $user['prenom'], PDO::PARAM_STR);
-        $statement->bindValue(':email', $user['email'], PDO::PARAM_STR);
-        $statement->bindValue(':password', password_hash($user['password'], PASSWORD_BCRYPT), PDO::PARAM_STR);
+        $sql = "INSERT INTO utilisateurs (nom, prenom, email, password)
+            VALUES (:lastname, :firstname, :email, :password)";
+
+        $statement = $this->pdo->prepare($sql);
+
+        $passwordHash = password_hash($user['password'], PASSWORD_DEFAULT);
+
+        $statement->bindParam(':lastname', $user['lastname'], PDO::PARAM_STR);
+        $statement->bindParam(':firstname', $user['firstname'], PDO::PARAM_STR);
+        $statement->bindParam(':email', $user['email'], PDO::PARAM_STR);
+        $statement->bindParam(':password', $passwordHash, PDO::PARAM_STR);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }
-
-
 }
