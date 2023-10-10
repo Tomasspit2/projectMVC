@@ -85,7 +85,7 @@ class AnnonceController extends AbstractController
             'modele' => '',
             'date_fin_enchere' => '',
             'prix_depart' => '',
-            'titre_annonce' => ''
+            'titre_annonce' => '',
         ];
         function checkdata($data): string
         {
@@ -164,7 +164,7 @@ class AnnonceController extends AbstractController
             } else {
                 $productManager = new AnnonceManager();
                 $productManager->insert($_POST, $_FILES);
-                header('Location:/annonce/index');
+                header('Location:/annonce');
             }
         }
 
