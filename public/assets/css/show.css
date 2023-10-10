@@ -1,0 +1,16 @@
+.text-yellow {
+    color: #f3b541;
+}
+p {
+    width: fit-content;
+}
+.row {
+    --bs-gutter-x : 0;
+}
+.show-button {
+    border: 2px solid #f3b541;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #f3b541;
+    padding: 3px;
+}
