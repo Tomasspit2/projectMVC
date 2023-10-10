@@ -1,8 +1,24 @@
 {# TODO : manage errors display #}
 
 <form method="post">
-    <input type="hidden" value="{{ annonce.uid_annonce.id }}" name="id">
-    <label for="title">Titre de l'annonce</label>
-    <input type="text" value="{{ annonce.titre_annonce }}" name="title" id="title">
+    <input type="hidden" value="{{ annonce.id }}" name="id">
+    <label for="titre_annonce">Titre de l'annonce</label>
+    <input type="text" value="{{ annonce.titre_annonce }}" name="titre_annonce" id="titre_annonce">
+    <label for="titre_annonce">Prix de départ</label>
+    <input type="text" value="{{ annonce.prix_depart }}" name="prix_depart" id="prix_depart">
+    <label for="titre_annonce">Date de fin</label>
+    <input type="text" value="{{ annonce.date_fin_enchere }}" name="date_fin_enchere" id="date_fin_enchere">
+    <label for="titre_annonce">Modèle</label>
+    <input type="text" value="{{ annonce.modele }}" name="modele" id="modele">
+    <label for="titre_annonce">Marque</label>
+    <input type="text" value="{{ annonce.marque }}" name="marque" id="marque">
+    <label for="titre_annonce">Puissance</label>
+    <input type="text" value="{{ annonce.puissance }}" name="puissance" id="puissance">
+    <label for="titre_annonce">Année</label>
+    <input type="text" value="{{ annonce.annee }}" name="annee" id="annee">
+    <label for="titre_annonce">Description</label>
+    <input type="text" value="{{ annonce.description }}" name="description" id="description">
+    <label for="titre_annonce">Photo</label>
+    <input type="text" value="{{ annonce.photo }}" name="photo" id="photo">
     <button>Submit</button>
 </form>

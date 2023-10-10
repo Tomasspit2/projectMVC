@@ -4,7 +4,7 @@
     <h1>Items</h1>
     <ul>
         {% for annonce in annonces %}
-            <li><a href="/annonce/show?id={{ annonce.uid_annonce }}">{{ annonce.uid_annonce }}. {{ annonce.titre_annonce }}</a></li>
+            <li><a href="/annonce/show?id={{ annonce.id }}">{{ annonce.id }}. {{ annonce.titre_annonce }}</a></li>
         {% else %}
             <li>Nothing to display</li>
         {% endfor %}
