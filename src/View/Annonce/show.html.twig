@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Annonce {{ annonce.titre_annonce }}</h1>
+    <h1>Annonce {{ annonce.titre_annonce }}</h1>ru
     <p>{{ annonce.uid_annonce }}. {{ annonce.titre_annonce }}</p>
     <a href="/annonce/edit?id={{ annonce.uid_annonce }}">Edit</a>
     <form action="/annonce/delete" method="POST">
