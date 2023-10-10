@@ -19,6 +19,6 @@ return [
     'annonce/show' => ['AnnonceController', 'show', ['id']],
     'annonce/delete' => ['AnnonceController', 'delete',],
     'annonce/add' => ['AnnonceController', 'add',],
-    'user/register' => ['UserController', 'register'],
+    'user/register' => ['UserController', 'add'],
     'user/login' => ['UserController', 'login'],
 ];
