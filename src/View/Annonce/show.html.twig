@@ -1,12 +1,37 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Annonce {{ annonce.titre_annonce }}</h1>ru
-    <p>{{ annonce.uid_annonce }}. {{ annonce.titre_annonce }}</p>
-    <a href="/annonce/edit?id={{ annonce.uid_annonce }}">Edit</a>
-    <form action="/annonce/delete" method="POST">
-        <input type="hidden" name="id" value="{{ annonce.uid_annonce }}">
-        <button>Delete</button>
-    </form>
-    <a href="/annonce">Back</a>
+    <div class="container">
+        <h1 class="border rounded-top mb-0 mt-3 bg-light text-center p-3">{{ annonce.titre_annonce }}</h1>
+        <div class="border row">
+            <div class="col m-3">
+                <img class="w-75 rounded" src="/assets/images/{{ annonce.photo }}" alt="{{ annonce.marque }} {{ annonce.modele }}" />
+            </div>
+            <div class="col m-3">
+                <h2 class="font-weight-bold">{{ annonce.marque }} {{ annonce.modele }}.</h2>
+                <p>Année: {{ annonce.annee }}</p>
+                <p>Puissance: {{ annonce.puissance }} CH.</p>
+                <p>Description: {{ annonce.description }}</p>
+                <p>Prix de départ: {{ annonce.prix_depart }} €.</p>
+                <p class="bg-dark text-yellow p-2 text-align-center">Aucune enchère n'a encore été déposée pour cette annonce !</p>
+            </div>
+        </div>
+
+
+
+
+        <div class="row border rounded-bottom bg-light mb-3">
+            <div class="col ms-3">
+            <p>Date de fin d'enchère: {{ annonce.date_fin_enchere|date("d/m/Y H:i") }}</p>
+            </div>
+            {# <a href="/annonce/edit?id={{ annonce.uid_annonce }}">Edit</a>
+            <form action="/annonce/delete" method="POST">
+            <input type="hidden" name="id" value="{{ annonce.uid_annonce }}"><button>Delete</button>
+            </form> #}
+            <div class="col m-3 text-end">
+            <a class="show-button" href="/annonce">Retourner à la liste</a>
+            <a class="show-button" href="#">Se connecter et proposer une enchère</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
