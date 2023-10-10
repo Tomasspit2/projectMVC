@@ -1,13 +1,36 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Items</h1>
-    <ul>
-        {% for annonce in annonces %}
-            <li><a href="/annonce/show?id={{ annonce.uid_annonce }}">{{ annonce.uid_annonce }}. {{ annonce.titre_annonce }}</a></li>
-        {% else %}
-            <li>Nothing to display</li>
-        {% endfor %}
-    </ul>
-    <a href="/annonce/add">Ajouter</a>
+    <section class="main cd-main-homepage">
+        <div class="container cd-homepage-container">
+            <div class="row mb-4 cd-h1-section">
+                <h1 class="cd-h1">Liste des annonces :: <span class="cd-h1-span">Faites vos jeux, rien ne va plus !</span></h1>
+            </div>
+            <div class="row align-items-center mb-4 cd-filter-marque">
+                <p class="col-auto cd-filter-title mb-0 mr-2">Filter par marque:</p>
+                <button class="col-auto btn btn-outline-secondary cd-button-marque">Toutes</button>
+                {% for annonce in annonces %}
+                <button class="col-auto btn btn-outline-secondary cd-button-marque">{{ annonce.marque }}</button>
+                {% endfor %}
+            </div>
+            <div class="row align-items-center mb-2 cd-ordre-alphabet">
+                <p class="col-auto cd-ordre-title mb-0 mr-2">Ordre alphabétique:</p>
+                <button class="col-auto btn btn-outline-secondary cd-button-ordre">Croissant</button>
+                <button class="col-auto btn btn-outline-secondary cd-button-ordre">Décroissant</button>
+            </div>
+            <div class="row cd-card-container">
+                {% for annonce in annonces %}
+                    <div class="col-md-3 mb-3 cd-card">
+                        <img src="/assets/images/{{ annonce.photo }}" class="cd-image-card img-fluid">
+                        <p class="cd-model">{{ annonce.modele }}</p>
+                        <div class="cd-titre-annonce">{{ annonce.titre_annonce }}</div>
+                        <button href="/annonce/show?id={{ annonce.id }}">Détail</button>
+                    </div>
+                {% else %}
+                    <li>Nothing to display</li>
+                {% endfor %}
+            </div>
+            <a href="/annonce/add">Ajouter</a>
+        </div>
+    </section>
 {% endblock %}
