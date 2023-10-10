@@ -24,7 +24,7 @@
                         <img src="/assets/images/{{ annonce.photo }}" class="cd-image-card img-fluid">
                         <p class="cd-model">{{ annonce.modele }}</p>
                         <div class="cd-titre-annonce">{{ annonce.titre_annonce }}</div>
-                        <button href="/annonce/show?id={{ annonce.id }}">Détail</button>
+                        <button><a href="/annonce/show?id={{ annonce.id }}">Détail</a></button>
                     </div>
                 {% else %}
                     <li>Nothing to display</li>
