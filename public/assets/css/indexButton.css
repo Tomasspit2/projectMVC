@@ -1,0 +1,9 @@
+.cd-button-marque, .cd-button-ordre {
+    border-radius: 0;
+}
+
+
+.cd-detail {
+    text-decoration: none;
+    color: orange;
+}
