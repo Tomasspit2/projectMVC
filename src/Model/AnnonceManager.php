@@ -8,7 +8,7 @@ class AnnonceManager extends AbstractManager
 {
     public const TABLE = 'annonces';
 
-    public function insert(array $annonce): int
+    public function insert(array $annonce, array $file): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
             " (`titre_annonce`, `prix_depart`,`date_fin_enchere`, `modele`,
@@ -23,7 +23,7 @@ class AnnonceManager extends AbstractManager
         $statement->bindValue('puissance', $annonce['puissance'], PDO::PARAM_INT);
         $statement->bindValue('annee', $annonce['annee'], PDO::PARAM_INT);
         $statement->bindValue('description', $annonce['description'], PDO::PARAM_STR);
-        $statement->bindValue('photo', $annonce['photo'], PDO::PARAM_STR);
+        $statement->bindValue('photo', $file['photo']['name'], PDO::PARAM_STR);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
