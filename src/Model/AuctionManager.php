@@ -57,4 +57,15 @@ class AuctionManager extends AbstractManager
 
         return $statement->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function addEnchere($id)
+    {
+        $enchereId = $this->getEnchereId($id);
+
+
+
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':enchereId', $enchereId, \PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
