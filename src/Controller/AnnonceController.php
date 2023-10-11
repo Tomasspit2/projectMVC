@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\AnnonceManager;
+use App\Model\AuctionManager;
 
 class AnnonceController extends AbstractController
 {
@@ -21,15 +22,10 @@ class AnnonceController extends AbstractController
         );
     }
 
-    /**
-     * Show informations for a specific annonce
-     * @param int $id
-     * @return string
-     */
     public function show(int $id): string
     {
-        $annonceManager = new AnnonceManager();
-        $annonce = $annonceManager->selectOneById($id);
+        $auctionManager = new AuctionManager();
+        $annonce = $auctionManager->selectAnnonceAndAuctionById($id);
 
         return $this->twig->render(
             'annonce/show.html.twig',

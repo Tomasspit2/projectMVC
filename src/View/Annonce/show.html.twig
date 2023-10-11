@@ -13,7 +13,10 @@
                 <p>Puissance: {{ annonce.puissance }} CH.</p>
                 <p>Description: {{ annonce.description }}</p>
                 <p>Prix de départ: {{ annonce.prix_depart }} €.</p>
-                <p class="bg-dark text-yellow p-2 text-align-center">Aucune enchère n'a encore été déposée pour cette annonce !</p>
+                <div>
+                    {{ dump(annonce.montant) }}
+                    <p class="bg-dark text-yellow p-2 text-align-center">Aucune enchère n'a encore été déposée pour cette annonce !</p>
+                </div>
             </div>
         </div>
 
