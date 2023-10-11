@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\AnnonceManager;
 use App\Model\UserManager;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -55,10 +56,11 @@ class LoginController extends AbstractController
                         && password_verify($_POST['password'], $user['password'])
                     ) {
                         $_SESSION['user_id'] = $user['id'];
-
                         $userData = $_SESSION['user_id'];
+                        $annonce = new AnnonceManager();
+                        $annonces = $annonce->selectAll();
 
-                        return $this->twig->render('/Annonce/index.html.twig', ['userData' => $userData]);
+                        return $this->twig->render('/Annonce/index.html.twig', ['userData' => $userData, 'annonces' => $annonces]);
                     } else {
                         $errors['connexion'] = "Votre email ou votre mot de passe n'est pas valide.";
                     }
