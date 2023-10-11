@@ -55,7 +55,10 @@ class LoginController extends AbstractController
                         && password_verify($_POST['password'], $user['password'])
                     ) {
                         $_SESSION['user_id'] = $user['id'];
-                        header('Location: /user/register');
+
+                        $userData = $_SESSION['user_id'];
+
+                        return $this->twig->render('/Annonce/index.html.twig', ['userData' => $userData]);
                     } else {
                         $errors['connexion'] = "Votre email ou votre mot de passe n'est pas valide.";
                     }
