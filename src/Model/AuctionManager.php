@@ -58,14 +58,20 @@ class AuctionManager extends AbstractManager
         return $statement->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function addEnchere($id)
+    public function addEnchere($id, array $enchereForm)
     {
         $enchereId = $this->getEnchereId($id);
+        $user_id = $_SESSION['user_id'];
 
+        $updateQuery = "UPDATE utilisateurs SET id_encheres = :enchereId WHERE id = :userId";
+        $updateStatement = $this->pdo->prepare($updateQuery);
+        $updateStatement->bindValue(':enchereId', $enchereId, \PDO::PARAM_INT);
+        $updateStatement->bindValue(':userId', $user_id, \PDO::PARAM_INT);
+        $updateStatement->execute();
 
-
-        $statement = $this->pdo->prepare($query);
-        $statement->bindValue(':enchereId', $enchereId, \PDO::PARAM_INT);
-        $statement->execute();
+        $insertQuery = "INSERT INTO encheres (`date`, `montant`) VALUES (current_date(), :montant)";
+        $insertStatement = $this->pdo->prepare($insertQuery);
+        $insertStatement->bindValue(':montant', $enchereForm['montant'], \PDO::PARAM_INT);
+        $insertStatement->execute();
     }
 }

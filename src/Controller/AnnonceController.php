@@ -37,6 +37,44 @@ class AnnonceController extends AbstractController
         $enchere = $auctionManager->selectUserAndEnchere($id);
         $userData = $_SESSION['user_id'];
 
+        $annonceForm = $errors = [
+            'montant' => '',
+            ];
+        function checkdata($data): string
+        {
+            $data = trim($data);
+            $data = htmlspecialchars($data);
+            $data = htmlentities($data);
+            return $data;
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_POST['montant']) | empty(trim($_POST['montant']))) {
+                $errors['montant'] = 'Ce champs est obligatoire.';
+            } else {
+                $annonce['description'] = checkdata($_POST['description']);
+        }
+            if (
+                $errors['montant'] != ""){
+                return $this->twig->render(
+                    'annonce/show.html.twig',
+                    [
+                        'annonce' => $annonce,
+                        'enchere' => $enchere
+                    ]
+                );
+            } else {
+                $auctionManager = new AuctionManager();
+                $auctionManager->addEnchere();
+                return $this->twig->render(
+                    'annonce/show.html.twig',
+                    [
+                        'annonce' => $annonce,
+                        'enchere' => $enchere
+                    ]
+                );
+            }
+        }
+
         return $this->twig->render(
             'annonce/show.html.twig',
             [
