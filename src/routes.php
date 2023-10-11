@@ -14,7 +14,7 @@ return [
     'items/show' => ['ItemController', 'show', ['id']],
     'items/add' => ['ItemController', 'add',],
     'items/delete' => ['ItemController', 'delete',],
-    '' => ['AnnonceController', 'index',],
+    '' => ['AnnonceController', 'index', ['marque']],
     'annonce/show' => ['AnnonceController', 'show', ['id']],
     'annonce/delete' => ['AnnonceController', 'delete',],
     'annonce/add' => ['AnnonceController', 'add',],

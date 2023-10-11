@@ -25,6 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `item`
 --
+create database auto_encheres;
 USE auto_encheres;
 
 create table item
@@ -34,6 +35,15 @@ create table item
     title varchar(255) not null
 )
     charset = latin1;
+
+create table encheres
+(
+    id             bigint unsigned auto_increment
+        primary key,
+    date           bigint unsigned not null,
+    montant        float unsigned  not null
+)
+    collate = utf8mb4_unicode_ci;
 
 create table utilisateurs
 (
@@ -50,14 +60,7 @@ create table utilisateurs
 )
     collate = utf8mb4_unicode_ci;
 
-create table encheres
-(
-    id             bigint unsigned auto_increment
-        primary key,
-    date           bigint unsigned not null,
-    montant        float unsigned  not null
-)
-    collate = utf8mb4_unicode_ci;
+
 
 create table annonces
 (

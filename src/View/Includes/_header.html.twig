@@ -28,13 +28,18 @@
                 <input class="form-control me-2 form-control-cd" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary btn-outline-secondary-cd" type="submit">Search</button>
             </form>
-
+            {% if utilisateurs.id %}
+                <li class="nav-item">
+                    <a class="btn btn-outline-secondary" href="/">Deconnexion</a>
+                </li>
+            {% elseif not utilisateurs.id %}
             <li class="nav-item">
                 <a class="btn btn-outline-secondary" href="/user/login">Connexion</a>
             </li>
             <li class="nav-item">
                 <a class="btn btn-outline-secondary" href="/user/register">Register</a>
             </li>
+            {% endif %}
         </ul>
     </div>
     </div>
