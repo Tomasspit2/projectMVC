@@ -6,19 +6,21 @@
             <div class="row mb-4 mt-4 cd-h1-section">
                 <h1 class="cd-h1">Liste des annonces :: <span class="cd-h1-span">Faites vos jeux, rien ne va plus !</span></h1>
             </div>
-            <div class="row align-items-center mb-4 cd-filter-marque">
-                <p class="col-auto cd-filter-title mb-0 mr-2">Filter par marque:</p>
-                <button class="col-auto btn btn-outline-warning cd-button-marque">Toutes</button>
+            <div class="row align-items-center mb-4 cd-filter-marque d-flex  ">
+                <p class="col-auto cd-filter-title mb-0  pe-3 pb-3">Filter par marque:</p>
+                <div class="w-100">
+                <button class="col-auto btn btn-outline-warning cd-button-marque fs-6 m-1 rounded-3">Toutes</button>
                 {% for annonce in annonces %}
-                <button class="col-auto btn btn-outline-warning cd-button-marque">{{ annonce.marque }}</button>
+                <button class="col-auto btn btn-outline-warning cd-button-marque m-1 rounded-3">{{ annonce.marque }}</button>
                 {% endfor %}
+                </div>
             </div>
             <div class="row align-items-center mb-2 cd-ordre-alphabet">
-                <p class="col-auto cd-ordre-title mb-0 mr-2">Ordre alphabétique:</p>
-                <button class="col-auto btn btn-outline-warning cd-button-ordre">Croissant</button>
-                <button class="col-auto btn btn-outline-warning cd-button-ordre">Décroissant</button>
+                <p class="col-auto cd-ordre-title mb-0 pe-3">Ordre alphabétique:</p>
+                <button class="col-auto btn btn-outline-warning cd-button-ordre m-1 rounded-3">Croissant</button>
+                <button class="col-auto btn btn-outline-warning cd-button-ordre m-1 rounded-3">Décroissant</button>
             </div>
-            <div class="row cd-container-card">
+            <div class="row cd-container-card d-flex justify-content-between">
                 {% for annonce in annonces %}
                     <div class="col-md-2 m-2 cd-card">
                         <div class="cd-image-container">
