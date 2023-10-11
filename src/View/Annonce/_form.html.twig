@@ -1,24 +1,24 @@
 {# TODO : manage errors display #}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="hidden" value="{{ annonce.id }}" name="id">
     <label for="titre_annonce">Titre de l'annonce</label>
     <input type="text" value="{{ annonce.titre_annonce }}" name="titre_annonce" id="titre_annonce">
-    <label for="titre_annonce">Prix de départ</label>
+    <label for="prix_depart">Prix de départ</label>
     <input type="text" value="{{ annonce.prix_depart }}" name="prix_depart" id="prix_depart">
-    <label for="titre_annonce">Date de fin</label>
+    <label for="date_fin_enchere">Date de fin</label>
     <input type="text" value="{{ annonce.date_fin_enchere }}" name="date_fin_enchere" id="date_fin_enchere">
-    <label for="titre_annonce">Modèle</label>
+    <label for="modele">Modèle</label>
     <input type="text" value="{{ annonce.modele }}" name="modele" id="modele">
-    <label for="titre_annonce">Marque</label>
+    <label for="marque">Marque</label>
     <input type="text" value="{{ annonce.marque }}" name="marque" id="marque">
-    <label for="titre_annonce">Puissance</label>
+    <label for="puissance">Puissance</label>
     <input type="text" value="{{ annonce.puissance }}" name="puissance" id="puissance">
-    <label for="titre_annonce">Année</label>
+    <label for="annee">Année</label>
     <input type="text" value="{{ annonce.annee }}" name="annee" id="annee">
-    <label for="titre_annonce">Description</label>
+    <label for="description">Description</label>
     <input type="text" value="{{ annonce.description }}" name="description" id="description">
-    <label for="titre_annonce">Photo</label>
-    <input type="text" value="{{ annonce.photo }}" name="photo" id="photo">
+    <label for="photo">Photo</label>
+    <input type="file" value="{{ annonce.photo }}" name="photo" id="photo">
     <button>Submit</button>
 </form>
