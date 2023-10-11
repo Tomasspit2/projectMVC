@@ -26,10 +26,14 @@ class AnnonceController extends AbstractController
     {
         $auctionManager = new AuctionManager();
         $annonce = $auctionManager->selectAnnonceAndAuctionById($id);
+        $enchere = $auctionManager->selectUserAndEnchere($id);
 
         return $this->twig->render(
             'annonce/show.html.twig',
-            ['annonce' => $annonce]
+            [
+                'annonce' => $annonce,
+                'enchere' => $enchere
+            ]
         );
     }
 
