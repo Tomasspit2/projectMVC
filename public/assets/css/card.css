@@ -20,6 +20,7 @@
 
 .cd-model {
     font-weight: bold;
+    overflow: hidden;
 }
 
 .cd-model, .cd-titre-annonce {
