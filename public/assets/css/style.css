@@ -4,3 +4,10 @@
 
 @import "card.css";
 @import "indexButton.css";
+
+textarea {
+    resize: none;
+}
+.DG-color-yellow {
+    color:#ffc107;
+}
