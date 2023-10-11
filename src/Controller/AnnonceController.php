@@ -11,15 +11,23 @@ class AnnonceController extends AbstractController
      * List Annonces
      * @return string
      */
-    public function index(): string
+    public function index($marque = " "): string
     {
         $annonceManager = new AnnonceManager();
-        $annonces = $annonceManager->selectAll('titre_annonce');
 
-        return $this->twig->render(
-            'Annonce/index.html.twig',
-            ['annonces' => $annonces]
-        );
+        if ($marque != " ") {
+            $annonces = $annonceManager->filterMarque($marque);
+            return $this->twig->render(
+                'Annonce/index.html.twig',
+                ['annonces' => $annonces]
+            );
+        } else {
+            $annonces = $annonceManager->selectAll('titre_annonce');
+            return $this->twig->render(
+                'Annonce/index.html.twig',
+                ['annonces' => $annonces]
+            );
+        }
     }
 
     public function show(int $id): string
