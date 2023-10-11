@@ -25,10 +25,7 @@ abstract class AbstractController
                 'debug' => true,
             ]
         );
-        $userManager = new UserManager();
-        $this->userData = isset($_SESSION['user_id']) ? $userManager->selectOneById($_SESSION['user_id']) : false;
 
-        $this->twig->addGlobal('user', $this->userData);
 
         $this->twig->addExtension(new DebugExtension());
     }
