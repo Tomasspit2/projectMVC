@@ -30,9 +30,26 @@ class AnnonceManager extends AbstractManager
     }
     public function update(array $annonce): bool
     {
-        $statement = $this->pdo->prepare("UPDATE" . self::TABLE . " SET `titre-annonce` = :titre-annonce WHERE id=:id");
+        $statement = $this->pdo->prepare("UPDATE" . self::TABLE .
+            " SET `titre_annonce` = :titre_annonce, `prix_depart` = :prix_depart,
+            `date_fin_enchere` = :date_fin_enchere, `modele` = :modele, `marque` = :marque,
+            `puissance` = :puissance, `annee` = :annee, `description` = :description,
+            `photo` = :photo  WHERE id=:id");
         $statement->bindValue('id', $annonce['id'], PDO::PARAM_INT);
-        $statement->bindValue('titre-annonce', $annonce['titre_annonce'], PDO::PARAM_STR);
+        $statement->bindValue('prix_depart', $annonce['prix_depart'], PDO::PARAM_STR);
+        $statement->bindValue('date_fin_enchere', $annonce['date_fin_enchere'], PDO::PARAM_STR);
+        $statement->bindValue('modele', $annonce['modele'], PDO::PARAM_STR);
+        $statement->bindValue('marque', $annonce['marque'], PDO::PARAM_STR);
+        $statement->bindValue('puissance', $annonce['puissance'], PDO::PARAM_STR);
+        $statement->bindValue('annee', $annonce['annee'], PDO::PARAM_STR);
+        $statement->bindValue('descritption', $annonce['description'], PDO::PARAM_STR);
+        $statement->bindValue('photo', $annonce['photo'], PDO::PARAM_STR);
         return $statement->execute();
+    }
+
+    public function filterMarque($marque)
+    {
+        $query = "SELECT * FROM annonces WHERE marque = '$marque'";
+        return $this->pdo->query($query)->fetchAll();
     }
 }
