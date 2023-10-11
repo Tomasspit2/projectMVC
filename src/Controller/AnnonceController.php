@@ -22,7 +22,7 @@ class AnnonceController extends AbstractController
                 ['annonces' => $annonces]
             );
         } else {
-            $annonces = $annonceManager->selectAll('titre_annonce');
+            $annonces = $annonceManager->selectAll('marque');
             return $this->twig->render(
                 'Annonce/index.html.twig',
                 ['annonces' => $annonces]
