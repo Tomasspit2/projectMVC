@@ -1,14 +1,9 @@
-
-
-
-
 .cd-card {
 
     border-radius: 8px;
     padding: 0px;
     border: 1px solid lightgrey;
 }
-
 
 
 .cd-image-card {
@@ -20,7 +15,6 @@
 
 .cd-model {
     font-weight: bold;
-    overflow: hidden;
 }
 
 .cd-model, .cd-titre-annonce {
