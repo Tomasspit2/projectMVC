@@ -42,7 +42,11 @@ create table utilisateurs
     nom      varchar(25) not null,
     prenom   varchar(25) not null,
     email    varchar(35) not null,
-    password varchar(64) not null
+    password varchar(64) not null,
+    id_encheres bigint unsigned null,
+        constraint fk_encheres_utilisateur
+        foreign key (id_encheres) references encheres (id)
+        on update cascade on delete cascade
 )
     collate = utf8mb4_unicode_ci;
 
@@ -68,13 +72,9 @@ create table annonces
     annee            smallint unsigned not null,
     description      text              not null,
     photo            varchar(1000)     null,
-    id_utilisateur bigint unsigned null,
     id_enchere bigint unsigned null,
     constraint fk_annonce_enchere
         foreign key (id_enchere) references encheres (id)
-            on update cascade on delete cascade,
-    constraint fk_annonce_utilisateur
-        foreign key (id_utilisateur) references utilisateurs (id)
             on update cascade on delete cascade
 )
     collate = utf8mb4_unicode_ci;
