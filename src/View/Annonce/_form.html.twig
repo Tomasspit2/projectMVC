@@ -1,24 +1,51 @@
 {# TODO : manage errors display #}
-
-<form method="post" enctype="multipart/form-data">
-    <input type="hidden" value="{{ annonce.id }}" name="id">
-    <label for="titre_annonce">Titre de l'annonce</label>
-    <input type="text" value="{{ annonce.titre_annonce }}" name="titre_annonce" id="titre_annonce">
-    <label for="prix_depart">Prix de départ</label>
-    <input type="text" value="{{ annonce.prix_depart }}" name="prix_depart" id="prix_depart">
-    <label for="date_fin_enchere">Date de fin</label>
-    <input type="text" value="{{ annonce.date_fin_enchere }}" name="date_fin_enchere" id="date_fin_enchere">
-    <label for="modele">Modèle</label>
-    <input type="text" value="{{ annonce.modele }}" name="modele" id="modele">
-    <label for="marque">Marque</label>
-    <input type="text" value="{{ annonce.marque }}" name="marque" id="marque">
-    <label for="puissance">Puissance</label>
-    <input type="text" value="{{ annonce.puissance }}" name="puissance" id="puissance">
-    <label for="annee">Année</label>
-    <input type="text" value="{{ annonce.annee }}" name="annee" id="annee">
-    <label for="description">Description</label>
-    <input type="text" value="{{ annonce.description }}" name="description" id="description">
-    <label for="photo">Photo</label>
-    <input type="file" value="{{ annonce.photo }}" name="photo" id="photo">
-    <button>Submit</button>
-</form>
+<div class="container d-flex justify-content-center">
+    <div class="w-50">
+        <form method="post" enctype="multipart/form-data">
+            <div class="d-flex flex-column  my-2">
+                <input class="form-control" type="hidden" value="{{ annonce.id }}" name="id">
+                <label class="form-label" for="titre_annonce">Titre de l'annonce</label>
+                <input class="form-control" type="text" value="{{ annonce.titre_annonce }}" name="titre_annonce"
+                       id="titre_annonce">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="prix_depart">Prix de départ</label>
+                <input class="form-control" type="text" value="{{ annonce.prix_depart }}" name="prix_depart"
+                       id="prix_depart">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="date_fin_enchere">Date de fin</label>
+                <input class="form-control " type="text" value="{{ annonce.date_fin_enchere }}" name="date_fin_enchere"
+                       id="date_fin_enchere">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="modele">Modèle</label>
+                <input class="form-control " type="text" value="{{ annonce.modele }}" name="modele" id="modele">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="marque">Marque</label>
+                <input class="form-control " type="text" value="{{ annonce.marque }}" name="marque" id="marque">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="puissance">Puissance</label>
+                <input class="form-control " type="text" value="{{ annonce.puissance }}" name="puissance" id="puissance">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="annee">Année</label>
+                <input class="form-control " type="text" value="{{ annonce.annee }}" name="annee" id="annee">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" value="{{ annonce.description }}" name="description"
+                          id="description" rows="3"></textarea>
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <label class="form-label" for="photo">Photo</label>
+                <input class="form-control " type="file" value="{{ annonce.photo }}" name="photo" id="photo">
+            </div>
+            <div class="d-flex flex-column  my-2">
+                <button class="btn btn-outline-warning mt-2 mb-2 mt-3 w-25">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
