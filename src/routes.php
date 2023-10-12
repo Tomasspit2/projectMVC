@@ -20,4 +20,5 @@ return [
     'annonce/add' => ['AnnonceController', 'add',],
     'user/register' => ['UserController', 'add'],
     'user/login' => ['LoginController', 'login'],
+    'user/logout' => ['LoginController', 'logout'],
 ];
