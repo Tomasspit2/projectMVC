@@ -4,12 +4,16 @@ namespace App\Controller;
 
 use App\Model\AnnonceManager;
 use App\Model\AuctionManager;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class AnnonceController extends AbstractController
 {
     /**
-     * List Annonces
-     * @return string
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
      */
     public function index($marque = " "): string
     {
@@ -17,61 +21,55 @@ class AnnonceController extends AbstractController
 
         if ($marque != " ") {
             $annonces = $annonceManager->filterMarque($marque);
-            return $this->twig->render(
-                'Annonce/index.html.twig',
-                ['annonces' => $annonces]
-            );
         } else {
             $annonces = $annonceManager->selectAll('titre_annonce');
-            return $this->twig->render(
-                'Annonce/index.html.twig',
-                ['annonces' => $annonces]
-            );
         }
+        return $this->twig->render(
+            'Annonce/index.html.twig',
+            ['annonces' => $annonces]
+        );
     }
 
+    /**
+     * @throws RuntimeError
+     * @throws LoaderError
+     * @throws SyntaxError
+     */
     public function show(int $id): string
     {
         $auctionManager = new AuctionManager();
         $annonce = $auctionManager->selectAnnonceAndAuctionById($id);
         $enchere = $auctionManager->selectUserAndEnchere($id);
+        $enchereForm = [];
 
-        $annonceForm = $errors = [
+        $errors = [
             'montant' => '',
             ];
         function checkdata($data): string
         {
             $data = trim($data);
             $data = htmlspecialchars($data);
-            $data = htmlentities($data);
-            return $data;
+            return htmlentities($data);
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($_POST['montant']) | empty(trim($_POST['montant']))) {
                 $errors['montant'] = 'Ce champs est obligatoire.';
             } else {
-                $annonce['description'] = checkdata($_POST['description']);
-        }
-            if (
-                $errors['montant'] != ""){
-                return $this->twig->render(
-                    'annonce/show.html.twig',
-                    [
-                        'annonce' => $annonce,
-                        'enchere' => $enchere
-                    ]
-                );
-            } else {
-                $auctionManager = new AuctionManager();
-                $auctionManager->addEnchere();
-                return $this->twig->render(
-                    'annonce/show.html.twig',
-                    [
-                        'annonce' => $annonce,
-                        'enchere' => $enchere
-                    ]
-                );
+                $enchereForm['montant'] = checkdata($_POST['montant']);
             }
+            if (
+                $errors['montant'] != ""
+            ) {
+                $auctionManager = new AuctionManager();
+                $auctionManager->addEnchere($id, $enchereForm);
+            }
+            return $this->twig->render(
+                'annonce/show.html.twig',
+                [
+                    'annonce' => $annonce,
+                    'enchere' => $enchere
+                ]
+            );
         }
 
         return $this->twig->render(
@@ -84,9 +82,9 @@ class AnnonceController extends AbstractController
     }
 
     /**
-     * Edit a specific annonce
-     * @param int $id
-     * @return string|null
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
      */
     public function edit(int $id): ?string
     {
@@ -104,7 +102,7 @@ class AnnonceController extends AbstractController
 
             header('Location: /annonce/show?id=' . $id);
 
-            // we are redirecting so we don't want any content rendered
+            // we are redirecting, so we don't want any content rendered
             return null;
         }
 
@@ -117,8 +115,9 @@ class AnnonceController extends AbstractController
     }
 
     /**
-     * Add a new annonce
-     * @return string|null
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
      */
     public function add(): ?string
     {
@@ -137,8 +136,7 @@ class AnnonceController extends AbstractController
         {
             $data = trim($data);
             $data = htmlspecialchars($data);
-            $data = htmlentities($data);
-            return $data;
+            return htmlentities($data);
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -217,12 +215,7 @@ class AnnonceController extends AbstractController
         return $this->twig->render('Annonce/add.html.twig', ['error' => $errors ,'annonce' => $annonce]);
     }
 
-    /**
-     * Delete a specific annonce
-     * @param int $id
-     *  @throws \Exception
-     */
-    public function delete(int $id): void
+    public function delete(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = trim($_POST['id']);
