@@ -48,9 +48,8 @@ class AnnonceController extends AbstractController
         $userData = $_SESSION['user_id'] ?? [];
         $enchereForm = $_POST;
 
-        $errors = [
-            'montant' => '',
-            ];
+        $montantError = ['montantEmpty' => []];
+
         function checkdata($data): string
         {
             $data = trim($data);
@@ -59,7 +58,7 @@ class AnnonceController extends AbstractController
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($_POST['montant']) | empty(trim($_POST['montant']))) {
-                $errors['montant'] = 'Ce champs est obligatoire.';
+                $montantError['montantEmpty'] = 'Ce champs est obligatoire.';
             } else {
                 $enchereForm['montant'] = checkdata($_POST['montant']);
             }
@@ -68,7 +67,7 @@ class AnnonceController extends AbstractController
                 $montantEnBase = $montantEnBase->selectMontantAnnonce($id);
 
             if ($enchereForm['montant'] < $montantEnBase) {
-                $errors['montant'] = 'Le montant doit être supérieur à celui enregistré en base.';
+                $montantError['montant'] = 'Le montant doit être supérieur à celui enregistré en base.';
             } else {
                 $auctionManager = new AuctionManager();
                 $auctionManager->addEnchere($_POST, $enchereForm);
@@ -83,8 +82,9 @@ class AnnonceController extends AbstractController
             'annonce/show.html.twig',
             [
                 'annonce' => $annonce,
-               'enchere' => $enchere,
+                'enchere' => $enchere,
                 'userData' => $userData,
+                'error' => $montantError
             ]
         );
     }

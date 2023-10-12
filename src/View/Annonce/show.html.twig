@@ -29,6 +29,10 @@
                                 <input class="form-control w-25 me-3" type="number" name="montant" id="montant">
                                 <button class=" btn btn-outline-warning show-button p-2">Faire l'offre!</button>
                             </form>
+                    {{ dump(error) }}
+                    {% if error['montantEmpty'] is not empty %}
+                        <p style="color: red">{{ error['montantEmpty'] }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
