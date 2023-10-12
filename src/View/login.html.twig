@@ -16,12 +16,18 @@
                             <div class="form-outline mb-4">
                                 <input type="email" id="email" name="email" class="form-control" />
                                 <label class="form-label" for="email">Email address</label>
+                                {% if error.email is not empty %}
+                                    <p style="color: red">{{ error['email'] }}</p>
+                                {% endif %}
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
                                 <input type="password" id="password" name="password" class="form-control" />
                                 <label class="form-label" for="password">Password</label>
+                                {% if error.password is not empty %}
+                                    <p style="color: red">{{ error['password'] }}</p>
+                                {% endif %}
                             </div>
 
                             <!-- Submit button -->
