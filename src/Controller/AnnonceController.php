@@ -17,15 +17,27 @@ class AnnonceController extends AbstractController
 
         if ($marque != " ") {
             $annonces = $annonceManager->filterMarque($marque);
+            if (isset($_SESSION['user_id'])) {
+                $userData = $_SESSION['user_id'];
+            } else {
+                $userData = [];
+            }
             return $this->twig->render(
                 'Annonce/index.html.twig',
-                ['annonces' => $annonces]
+                ['annonces' => $annonces,
+                    'userData' => $userData]
             );
         } else {
             $annonces = $annonceManager->selectAll('marque');
+            if (isset($_SESSION['user_id'])) {
+                $userData = $_SESSION['user_id'];
+            } else {
+                $userData = [];
+            }
             return $this->twig->render(
                 'Annonce/index.html.twig',
-                ['annonces' => $annonces]
+                ['annonces' => $annonces,
+                    'userData' => $userData]
             );
         }
     }
@@ -124,6 +136,7 @@ class AnnonceController extends AbstractController
      */
     public function add(): ?string
     {
+        $userData = $_SESSION['user_id'];
         $annonce = $errors = [
             'description' => '',
             'photo' => '',
@@ -208,7 +221,7 @@ class AnnonceController extends AbstractController
                 | $errors['prix_depart'] != ""
                 | $errors['titre_annonce'] != ""
             ) {
-                return $this->twig->render('annonce/add.html.twig', ['error' => $errors, 'annonce' => $annonce]);
+                return $this->twig->render('annonce/add.html.twig', ['error' => $errors, 'annonce' => $annonce, 'userData' => $userData]);
             } else {
                 $productManager = new AnnonceManager();
                 $productManager->insert($_POST, $_FILES);
@@ -216,7 +229,7 @@ class AnnonceController extends AbstractController
             }
         }
 
-        return $this->twig->render('Annonce/add.html.twig', ['error' => $errors ,'annonce' => $annonce]);
+        return $this->twig->render('Annonce/add.html.twig', ['error' => $errors ,'annonce' => $annonce, 'userData' => $userData]);
     }
 
     /**
