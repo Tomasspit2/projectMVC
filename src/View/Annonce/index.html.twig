@@ -3,7 +3,7 @@
 {% block content %}
     {{ dump(userData) }}
     <section class="main cd-main-homepage">
-        <div class="container cd-homepage-container">
+        <div class="container cd-homepage-container mb-5">
             <div class="row mb-4 mt-4 cd-h1-section">
                 <h1 class="cd-h1">Liste des annonces : <span class="cd-h1-span">Faites vos jeux, rien ne va plus !</span></h1>
             </div>
@@ -25,7 +25,7 @@
                 <button id="sort-asc" class="col-auto btn btn-outline-warning cd-button-ordre m-1 rounded-3">Croissant</button>
                 <button id="sort-desc" class="col-auto btn btn-outline-warning cd-button-ordre m-1 rounded-3">Décroissant</button>
             </div>
-            <div id="cd-container-card" class="row cd-container-card d-flex justify-content-between">
+            <div id="cd-container-card" class="row cd-container-card d-flex justify-content-center">
                 {% for annonce in annonces %}
                     <div class="col-md-2 m-2 cd-card">
                         <div class="cd-image-container">
@@ -38,9 +38,6 @@
                 {% else %}
                     <li>Nothing to display</li>
                 {% endfor %}
-            </div>
-            <div class="d-flex flex-row">
-            <button class="btn btn-outline-warning mt-2 mb-2"><a class="cd-detail" href="/annonce/add">Ajouter une annonce</a></button>
             </div>
         </div>
     </section>
