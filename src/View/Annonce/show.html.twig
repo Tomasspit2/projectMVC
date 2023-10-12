@@ -20,6 +20,12 @@
                         <div>
                             <h2>The highest offer so far:</h2>
                             <p><span style="font-size: 10px; margin-right: 5px">{{ enchere.date }}</span>{{ enchere.nom }} {{ enchere.prenom }}: {{ enchere. montant}} €</p>
+
+                            <form method="post">
+                                <label for="montant">Votre montant:</label>
+                                <input type="number" name="montant" id="montant">
+                                <button>Faire l'offre!</button>
+                            </form>
                         </div>
                     {% endif %}
                 </div>
