@@ -39,11 +39,14 @@ class AnnonceController extends AbstractController
      */
     public function show(int $id): string
     {
-        $auctionManager = new AuctionManager();
-        $annonce = $auctionManager->selectAnnonceAndAuctionById($id);
-        $enchere = $auctionManager->selectUserAndEnchere($id);
+        $annonceManager = new AnnonceManager();
+        $annonce = $annonceManager->selectOneById($id);
+        $enchereManager = new AuctionManager();
+        $enchere = $enchereManager->selectNameAnnonceMontant($id);
+
+
         $userData = $_SESSION['user_id'] ?? [];
-        $enchereForm = [];
+        $enchereForm = $_POST;
 
         $errors = [
             'montant' => '',
@@ -60,26 +63,27 @@ class AnnonceController extends AbstractController
             } else {
                 $enchereForm['montant'] = checkdata($_POST['montant']);
             }
-            if (
-                $errors['montant'] != ""
-            ) {
+
+            $montantEnBase = new AuctionManager();
+                $montantEnBase = $montantEnBase->selectMontantAnnonce($id);
+
+            if ($enchereForm['montant'] < $montantEnBase) {
+                $errors['montant'] = 'Le montant doit être supérieur à celui enregistré en base.';
+            } else {
                 $auctionManager = new AuctionManager();
-                $auctionManager->addEnchere($id, $enchereForm);
+                $auctionManager->addEnchere($_POST, $enchereForm);
+
+                header('Location: ' . $_SERVER['REQUEST_URI']);
             }
-            return $this->twig->render(
-                'annonce/show.html.twig',
-                [
-                    'annonce' => $annonce,
-                    'enchere' => $enchere
-                ]
-            );
+
+
         }
 
         return $this->twig->render(
             'annonce/show.html.twig',
             [
                 'annonce' => $annonce,
-                'enchere' => $enchere,
+               'enchere' => $enchere,
                 'userData' => $userData,
             ]
         );

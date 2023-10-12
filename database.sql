@@ -107,4 +107,20 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `password`) VALUES
 
 INSERT INTO `encheres` (`id`, `date`, `montant`) VALUES
     (1, '1693479600', '25000');
+-- Supprimez la clé étrangère existante dans la table `utilisateurs`
+ALTER TABLE utilisateurs
+    DROP FOREIGN KEY fk_encheres_utilisateur;
+
+-- Supprimez la colonne `id_encheres` de la table `utilisateurs`
+ALTER TABLE utilisateurs
+    DROP COLUMN id_encheres;
+
+-- Créez une nouvelle table de jointure `utilisateurs_encheres`
+CREATE TABLE utilisateurs_encheres (
+                                       id_utilisateur bigint unsigned,
+                                       id_enchere bigint unsigned,
+                                       PRIMARY KEY (id_utilisateur, id_enchere),
+                                       FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs (id),
+                                       FOREIGN KEY (id_enchere) REFERENCES encheres (id)
+);
 
