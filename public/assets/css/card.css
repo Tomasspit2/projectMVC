@@ -1,5 +1,5 @@
 .cd-card {
-
+    position: relative;
     border-radius: 8px;
     padding: 0px;
     border: 1px solid lightgrey;

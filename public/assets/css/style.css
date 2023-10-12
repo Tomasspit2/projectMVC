@@ -11,3 +11,12 @@ textarea {
 .DG-color-yellow {
     color:#ffc107;
 }
+
+a {
+    color:#ffc107;
+    text-decoration: none;
+}
+a:hover {
+    color:black;
+    text-decoration: none;
+}

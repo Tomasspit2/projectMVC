@@ -15,11 +15,9 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="/">Accueil</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">DB-Schema</a>
-            </li>
+
         </ul>
 
         <!-- Right links and search bar -->
@@ -28,11 +26,14 @@
                 <input class="form-control me-2 form-control-cd" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary btn-outline-secondary-cd" type="submit">Search</button>
             </form>
-            {% if utilisateurs.id %}
+            {% if userData %}
                 <li class="nav-item">
-                    <a class="btn btn-outline-secondary" href="/">Deconnexion</a>
+                    <a class="btn btn-outline-secondary" href="/user/logout">Deconnexion</a>
                 </li>
-            {% elseif not utilisateurs.id %}
+                <li class="nav-item">
+                    <a class="btn btn-outline-secondary" href="/annonce/add">Ajout</a>
+                </li>
+            {% elseif not userData %}
             <li class="nav-item">
                 <a class="btn btn-outline-secondary" href="/user/login">Connexion</a>
             </li>
