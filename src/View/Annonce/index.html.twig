@@ -10,11 +10,11 @@
             <div class="row align-items-center mb-4 cd-filter-marque d-flex  ">
                 <p class="col-auto cd-filter-title mb-0  pe-3 pb-3">Filter par marque:</p>
                 <div class="w-100">
-                <button class="col-auto btn btn-outline-warning cd-button-marque fs-6 m-1 rounded-3"><a href="/">Toutes</a></button>
+                <a class="show-button btn btn-outline-warning" href="/">Toutes</a>
                     {% set maVariable = '' %}
                     {% for annonce in annonces %}
                         {% if maVariable != annonce.marque %}
-                            <button class="col-auto btn btn-outline-warning cd-button-marque m-1 rounded-3 "> <a href="/?marque={{ annonce.marque }}">{{ annonce.marque }}</a></button>
+                            <a class="show-button btn btn-outline-warning" href="/?marque={{ annonce.marque }}">{{ annonce.marque }}</a>
                         {% endif %}
                         {% set maVariable = annonce.marque %}
                     {% endfor %}
@@ -22,8 +22,8 @@
             </div>
             <div class="row align-items-center mb-2 cd-ordre-alphabet">
                 <p class="col-auto cd-ordre-title mb-0 pe-3">Ordre alphabétique:</p>
-                <button id="sort-asc" class="col-auto btn btn-outline-warning cd-button-ordre m-1 rounded-3">Croissant</button>
-                <button id="sort-desc" class="col-auto btn btn-outline-warning cd-button-ordre m-1 rounded-3">Décroissant</button>
+                <button id="sort-asc" class="col-auto btn btn-outline-warning show-button me-1">Croissant</button>
+                <button id="sort-desc" class="col-auto btn btn-outline-warning show-button">Décroissant</button>
             </div>
             <div id="cd-container-card" class="row cd-container-card d-flex justify-content-center">
                 {% for annonce in annonces %}
@@ -33,7 +33,7 @@
                         </div>
                         <p class="cd-model">{{ annonce.modele }}</p>
                         <div class="cd-titre-annonce">{{ annonce.titre_annonce }}</div>
-                        <button class="btn btn-outline-warning m-2 cd-button-detail"><a class="cd-detail" href="/annonce/show?id={{ annonce.id }}">Détail</a></button>
+                        <button class="btn btn-outline-warning m-2 show-button"><a class="cd-detail" href="/annonce/show?id={{ annonce.id }}">Détail</a></button>
                     </div>
                 {% else %}
                     <li>Nothing to display</li>

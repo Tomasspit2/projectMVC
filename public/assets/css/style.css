@@ -16,6 +16,7 @@ a {
     color:#ffc107;
     text-decoration: none;
 }
+button:hover,
 a:hover {
     color:black;
     text-decoration: none;

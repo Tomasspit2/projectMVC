@@ -34,8 +34,11 @@
             <input type="hidden" name="id" value="{{ annonce.uid_annonce }}"><button>Delete</button>
             </form> #}
             <div class="col m-3 text-end">
-            <a class="show-button" href="/">Retourner à la liste</a>
-            <a class="show-button" href="/user/login">Se connecter et proposer une enchère</a>
+            <a class="show-button btn btn-outline-warning" href="/">Retourner à la liste</a>
+
+                {% if not userData %}
+            <a class="show-button btn btn-outline-warning" href="/user/login">Se connecter et proposer une enchère</a>
+                {% endif %}
             </div>
         </div>
     </div>
