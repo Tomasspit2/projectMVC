@@ -14,7 +14,6 @@
                 <p>Description: {{ annonce.description }}</p>
                 <p>Prix de départ: {{ annonce.prix_depart }} €.</p>
                 <div>
-
                     {% if enchere == false %}
                         <p class="bg-dark text-yellow p-2 text-align-center">Aucune enchère n'a encore été déposée pour cette annonce !</p>
                     {% else %}
@@ -32,6 +31,9 @@
                             </form>
                     {% if error['montantEmpty'] is not empty %}
                         <p style="color: red">{{ error['montantEmpty'] }}</p>
+                    {% endif %}
+                    {% if error['montant'] is not empty %}
+                        <p style="color: red">{{ error['montant'] }}</p>
                     {% endif %}
                     {% endif %}
                 </div>

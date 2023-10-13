@@ -56,16 +56,42 @@ class AuctionManager extends AbstractManager
 
         return $queryStatement->fetch(\PDO::FETCH_ASSOC);
     }
+    public function selectMontantAnnonce()
+    {
+        try {
+            $annonceId = (int)$_GET['id'];
+            $query = "SELECT e.montant FROM encheres AS e
+                  JOIN annonces AS a ON e.id = a.id_enchere
+                  WHERE a.id = :id";
+            $queryStatement = $this->pdo->prepare($query);
+            $queryStatement->bindValue('id', $annonceId, \PDO::PARAM_INT);
+            $queryStatement->execute();
 
-    public function selectMontantAnnonce($id) {
+            $result = $queryStatement->fetch(\PDO::FETCH_ASSOC);
 
-        $query = "SELECT e.montant FROM encheres AS e
-        JOIN annonces AS a ON e.id = a.id_enchere
-        WHERE a.id = :id";
+            if ($result === false) {
+                // No data found for the given ID
+                return null;
+            }
+
+            return $result['montant'];
+        } catch (\Exception $e) {
+            // Handle any exceptions or errors that occur during the query
+            // You can log the error or return an error message
+            // For debugging purposes, you can echo or log the error message
+            echo 'Error: ' . $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getMinAmount()
+    {
+        $annonceId = (int)$_GET['id'];
+        $query = "SELECT prix_depart FROM annonces WHERE id = :id";
         $queryStatement = $this->pdo->prepare($query);
-        $queryStatement->bindValue('id', $id, \PDO::PARAM_INT);
+        $queryStatement->bindValue(':id', $annonceId, \PDO::PARAM_INT);
         $queryStatement->execute();
-
-        return $queryStatement->fetch(\PDO::FETCH_ASSOC);
+        $result = $queryStatement->fetch(\PDO::FETCH_ASSOC);
+        return $result['prix_depart'];
     }
 }
