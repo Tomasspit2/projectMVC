@@ -60,22 +60,12 @@ class AnnonceController extends AbstractController
             if (!isset($_POST['montant']) | empty(trim($_POST['montant']))) {
                 $montantError['montantEmpty'] = 'Ce champs est obligatoire.';
             } else {
-                $enchereForm['montant'] = checkdata($_POST['montant']);
+                $enchereForm['montant'] = intval($_POST['montant']);
             }
-
-            $montantEnBase = new AuctionManager();
-                $montantEnBase = $montantEnBase->selectMontantAnnonce($id);
-
-            if ($enchereForm['montant'] < $montantEnBase) {
-                $montantError['montant'] = 'Le montant doit être supérieur à celui enregistré en base.';
-            } else {
                 $auctionManager = new AuctionManager();
                 $auctionManager->addEnchere($_POST, $enchereForm);
 
                 header('Location: ' . $_SERVER['REQUEST_URI']);
-            }
-
-
         }
 
         return $this->twig->render(
@@ -240,4 +230,5 @@ class AnnonceController extends AbstractController
             header('Location:/annonce');
         }
     }
+
 }

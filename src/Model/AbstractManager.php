@@ -2,11 +2,11 @@
 
 namespace App\Model;
 
-use App\Model\Connection;
 use PDO;
 
 /**
  * Abstract class handling default manager.
+ *
  */
 abstract class AbstractManager
 {
@@ -21,7 +21,10 @@ abstract class AbstractManager
     }
 
     /**
-     * Get all row from database.
+     * @description Get all row from database.
+     * @param string $orderBy
+     * @param string $direction
+     * @return array
      */
     public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
     {
@@ -35,6 +38,8 @@ abstract class AbstractManager
 
     /**
      * Get one row from database by ID.
+     * @param int $id
+     * @return array
      */
     public function selectOneById(int $id): array
     {
@@ -48,6 +53,8 @@ abstract class AbstractManager
 
     /**
      * Delete row form an ID
+     * @param int $id
+     * @return void
      */
     public function delete(int $id): void
     {

@@ -14,6 +14,7 @@
                 <p>Description: {{ annonce.description }}</p>
                 <p>Prix de départ: {{ annonce.prix_depart }} €.</p>
                 <div>
+
                     {% if enchere == false %}
                         <p class="bg-dark text-yellow p-2 text-align-center">Aucune enchère n'a encore été déposée pour cette annonce !</p>
                     {% else %}
@@ -23,15 +24,15 @@
                             <p>{{ enchere.date|date("d/m/Y H:i") }} {{ enchere.nom }} {{ enchere.prenom }}: {{ enchere. montant_max}} €</p>
                         </div>
                     {% endif %}
-
+                    {% if userData %}
                             <form method="post" class="d-flex">
                                 <label class="form-label me-2 d-flex align-items-center mb-0 " for="montant">Votre montant:</label>
                                 <input class="form-control w-25 me-3" type="number" name="montant" id="montant">
                                 <button class=" btn btn-outline-warning show-button p-2">Faire l'offre!</button>
                             </form>
-                    {{ dump(error) }}
                     {% if error['montantEmpty'] is not empty %}
                         <p style="color: red">{{ error['montantEmpty'] }}</p>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
