@@ -43,7 +43,12 @@ class AnnonceController extends AbstractController
         $annonce = $annonceManager->selectOneById($id);
         $enchereManager = new AuctionManager();
         $enchere = $enchereManager->selectNameAnnonceMontant($id);
+        $montantEnBase = (new AuctionManager())->selectMontantAnnonce();
+        $montant =  (new AuctionManager())->getMinAmount();
 
+        if ($montantEnBase < $montant) {
+            $montantEnBase = $montant;
+        }
 
         $userData = $_SESSION['user_id'] ?? [];
         $enchereForm = $_POST;
@@ -57,6 +62,26 @@ class AnnonceController extends AbstractController
             return htmlentities($data);
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_POST['montant']) || empty(trim($_POST['montant']))) {
+                $montantError['montantEmpty'] = 'Ce champ est obligatoire.';
+            } else {
+                $enchereForm['montant'] = $_POST['montant'];
+                $enchereForm['montant'] = floatval($enchereForm['montant']);
+
+                if ($enchereForm['montant'] < $montantEnBase) {
+                    $montantError['montant'] = 'Le montant doit être supérieur à l\'offre courant.';
+                } else {
+                    $auctionManager = new AuctionManager();
+                    $auctionManager->addEnchere($_POST, $enchereForm);
+
+
+                    // Rediriger vers la page actuelle
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                }
+            }
+        }
+
+        /* if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($_POST['montant']) | empty(trim($_POST['montant']))) {
                 $montantError['montantEmpty'] = 'Ce champs est obligatoire.';
             } else {
@@ -66,7 +91,7 @@ class AnnonceController extends AbstractController
                 $auctionManager->addEnchere($_POST, $enchereForm);
 
                 header('Location: ' . $_SERVER['REQUEST_URI']);
-        }
+        } */
 
         return $this->twig->render(
             'annonce/show.html.twig',
@@ -74,7 +99,10 @@ class AnnonceController extends AbstractController
                 'annonce' => $annonce,
                 'enchere' => $enchere,
                 'userData' => $userData,
-                'error' => $montantError
+                'error' => $montantError,
+                'formprice' => $enchereForm,
+                'baseprice' => $montantEnBase,
+                'montant' => $montant
             ]
         );
     }
@@ -230,5 +258,4 @@ class AnnonceController extends AbstractController
             header('Location:/annonce');
         }
     }
-
 }
