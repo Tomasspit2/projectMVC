@@ -1,9 +1,9 @@
 .text-yellow {
     color: #f3b541;
 }
-p {
+/*p {
     width: fit-content;
-}
+}*/
 .row {
     --bs-gutter-x : 0;
 }
